@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Reply
+{% endblock %}
+
+{% block main %}
+    <form action="/compose" method="post">
+        <div class="mb-3">
+            <lable>From:</lable>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username"  name="sender" value="{{ emailDetail.recipient }}"  type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        </div>
+        <lable>To:</lable>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="recipient" name="recipient" placeholder="Recipient" value="{{ emailDetail.sender }}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+        </div>
+        <div class="mb-3">
+            <lable>Subject:</lable>
+            <input class="form-control mx-auto w-auto" id="subject" value="{{ emailDetail.subject }}" name="subject" placeholder="Subject" type="text">
+        </div>
+        <div class="mb-3">
+            <textarea name="body"></textarea>
+        </div>
+        <button class="btn btn-success" type="submit">Reply</button>
+    </form>
+{% endblock %}
