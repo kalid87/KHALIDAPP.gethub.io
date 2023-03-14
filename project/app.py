@@ -10,6 +10,7 @@ from helpers import apology, login_required, lookup, usd
 
 # Configure application
 app = Flask(__name__)
+app = application
 
 #Ensur templates are aout-reloaded
 app.config["TEMPLATES_AOUT_RELOAD"] = True
