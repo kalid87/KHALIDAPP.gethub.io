@@ -68,7 +68,7 @@ def compose():
         body = request.form.get("body")
 
         if not sender or not recipient or not subject or not body:
-            return apology("No Empity Field")
+            return apology("No Empty Field")
 
         db.execute("INSERT INTO emails (sender, recipient, subject, body) VALUES(?, ?, ?, ?)", sender, recipient, subject, body)
 
