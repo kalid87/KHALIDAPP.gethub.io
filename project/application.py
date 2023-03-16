@@ -11,8 +11,6 @@ from helpers import apology, login_required, lookup, usd
 # Configure application
 app = application = Flask(__name__)
 
-application.debug = True
-application.run()
 
 app.config["TEMPLATES_AOUT_RELOAD"] = True
 
@@ -185,4 +183,5 @@ def reply():
         emailDetail = emailDetailDB[0]
         return render_template("reply.html", emailDetail=emailDetail)
 
-
+application.debug = True
+application.run()
