@@ -9,8 +9,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required, lookup, usd
 
 # Configure application
-application = app = Flask(__name__)
+app = application = Flask(__name__)
 
+application.debug = True
+application.run()
 
 app.config["TEMPLATES_AOUT_RELOAD"] = True
 
