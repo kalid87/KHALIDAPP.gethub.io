@@ -12,15 +12,15 @@ from helpers import apology, login_required, lookup, usd
 application = app = Flask(__name__)
 
 
-application.config["TEMPLATES_AOUT_RELOAD"] = True
+app.config["TEMPLATES_AOUT_RELOAD"] = True
 
 # Custom filter
 # app.jinja_env.filters["usd"] = usd
 
 # Configure session to use filesystem (instead of signed cookies)
-application.config["SESSION_PERMANENT"] = False
-application.config["SESSION_TYPE"] = "filesystem"
-Session(application)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///project.db")
@@ -30,7 +30,7 @@ db = SQL("sqlite:///project.db")
 #   raise RuntimeError("API_KEY not set")
 
 
-@application.after_request
+@app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
@@ -39,7 +39,7 @@ def after_request(response):
     return response
 
 
-@application.route("/")
+@app.route("/")
 @login_required
 def inbox():
     """Show All The Email Received"""
@@ -51,7 +51,7 @@ def inbox():
     return render_template("index.html", emails=emails)
 
 
-@application.route("/compose", methods=["GET", "POST"])
+@app.route("/compose", methods=["GET", "POST"])
 @login_required
 def compose():
     """Write an email to someone"""
@@ -75,7 +75,7 @@ def compose():
         return redirect("/sent")
 
 
-@application.route("/sent")
+@app.route("/sent")
 @login_required
 def sent():
     """Show history of transactions"""
@@ -87,7 +87,7 @@ def sent():
     return render_template("index.html", emails=emails)
 
 
-@application.route("/login", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
 
@@ -124,7 +124,7 @@ def login():
         return render_template("login.html")
 
 
-@application.route("/logout")
+@app.route("/logout")
 def logout():
     """Log user out"""
 
@@ -135,7 +135,7 @@ def logout():
     return redirect("/")
 
 
-@application.route("/email", methods=["POST"])
+@app.route("/email", methods=["POST"])
 @login_required
 def email():
     """VIEW EMAIL DETAILS."""
@@ -146,7 +146,7 @@ def email():
         return render_template("email.html", emailDetail=emailDetail)
 
 
-@application.route("/register", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
     if request.method == "GET":
@@ -173,7 +173,7 @@ def register():
 
 
 
-@application.route("/reply", methods=["POST"])
+@app.route("/reply", methods=["POST"])
 @login_required
 def reply():
     """Reply the email on email detail views. """
